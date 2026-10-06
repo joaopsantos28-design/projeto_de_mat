@@ -1,0 +1,16 @@
+{
+    "name": "joao/projeto_de_mat",
+    "description": "projeto de matematica",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "joao pedro",
+            "email": "joao.p.santos28@ba.estudante.senai.br"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpunit/phpunit": "^13.5@dev"
+    }
+}
