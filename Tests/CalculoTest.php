@@ -15,7 +15,48 @@ class CalculoTest extends TestCase {
     }
 
     #[\PHPUnit\Framework\Attributes\Test]
-    public function it_should_be_able_to_process_get_request() {
-        
+public function it_should_register_matrices()
+{
+    $result = $this->calculoController->somar(
+        [[1, 2]],
+        [[3, 4]]
+    );
+
+    $this->assertEquals([[4, 6]], $result);
+}
+
+#[\PHPUnit\Framework\Attributes\Test]
+public function it_should_accept_valid_matrices()
+    {
+        $result = $this->calculoController->somar(
+            [[1, 2]],
+            [[3, 4]]
+        );
+
+        $this->assertNotEmpty($result);
     }
+
+#[\PHPUnit\Framework\Attributes\Test]
+public function it_should_add_matrices()
+    {
+        $result = $this->calculoController->somar(
+            [[1, 2]],
+            [[3, 4]]
+        );
+
+        $this->assertEquals([[4, 6]], $result);
+    }
+
+#[\PHPUnit\Framework\Attributes\Test]
+#[\PHPUnit\Framework\Attributes\Test]
+#[\PHPUnit\Framework\Attributes\Test]
+#[\PHPUnit\Framework\Attributes\Test]
+#[\PHPUnit\Framework\Attributes\Test]
+#[\PHPUnit\Framework\Attributes\Test]
+
+
+
+
+
+
 }

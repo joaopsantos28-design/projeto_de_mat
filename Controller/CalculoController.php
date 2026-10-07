@@ -2,123 +2,69 @@
 
 namespace Controller;
 
-use Model\CalculoModel;
 use Exception;
+use Model\CalculoModel;
 
 class CalculoController
 {
-    public function __construct(
-        private CalculoModel $calculoModel
-    ) {}
+    //private CalculoModel $calculoModel;
 
-    public function ProcessRequest(string $method, ?string $id = null): void
+    public function __construct(private CalculoModel $calculoModel)
+    {
+        //$this->calculoModel = new CalculoModel();
+    }
+
+    public function somar(array $a, array $b): array
     {
         try {
-            if ($id !== null) {
-                $this->processItemRequest($method, $id);
-            } else {
-                $this->processCollectionRequest($method);
-            }
+            return $this->calculoModel->somar($a, $b);
         } catch (Exception $e) {
-            http_response_code(400);
-
-            echo json_encode([
-                "erro" => $e->getMessage()
-            ]);
+            return ['erro' => $e->getMessage()];
         }
     }
 
-    private function processCollectionRequest(string $method): void
+    public function subtrair(array $a, array $b): array
     {
-        switch ($method) {
-
-            case "GET":
-                $calculos = $this->calculoModel->getAll();
-
-                http_response_code(200);
-
-                echo json_encode($calculos);
-                break;
-
-            case "POST":
-                $data = json_decode(
-                    file_get_contents("php://input"),
-                    true
-                );
-
-                if (
-                    !isset($data["operacao"]) ||
-                    !isset($data["entrada"]) ||
-                    !isset($data["resultado"])
-                ) {
-                    throw new Exception(
-                        "Operação, entrada e resultado são obrigatórios."
-                    );
-                }
-
-                $id = $this->calculoModel->create(
-                    $data["operacao"],
-                    $data["entrada"],
-                    $data["resultado"]
-                );
-
-                http_response_code(201);
-
-                echo json_encode([
-                    "mensagem" => "Cálculo registrado com sucesso.",
-                    "id" => $id
-                ]);
-                break;
-
-            default:
-                http_response_code(405);
-
-                echo json_encode([
-                    "erro" => "Método não permitido."
-                ]);
+        try {
+            return $this->calculoModel->subtrair($a, $b);
+        } catch (Exception $e) {
+            return ['erro' => $e->getMessage()];
         }
     }
 
-    private function processItemRequest(
-        string $method,
-        string $id
-    ): void {
-        switch ($method) {
+    public function multiplicar(array $a, array $b): array
+    {
+        try {
+            return $this->calculoModel->multiplicar($a, $b);
+        } catch (Exception $e) {
+            return ['erro' => $e->getMessage()];
+        }
+    }
 
-            case "GET":
-                $calculo = $this->calculoModel->getById($id);
+    public function transpor(array $matriz): array
+    {
+        try {
+            return $this->calculoModel->transpor($matriz);
+        } catch (Exception $e) {
+            return ['erro' => $e->getMessage()];
+        }
+    }
 
-                if (!$calculo) {
-                    http_response_code(404);
+    public function determinante(array $matriz): float|array
+    {
+        try {
+            return $this->calculoModel->determinante($matriz);
+        } catch (Exception $e) {
+            return ['erro' => $e->getMessage()];
+        }
+    }
 
-                    echo json_encode([
-                        "erro" => "Cálculo não encontrado."
-                    ]);
-
-                    return;
-                }
-
-                http_response_code(200);
-
-                echo json_encode($calculo);
-                break;
-
-            case "DELETE":
-                $this->calculoModel->delete($id);
-
-                http_response_code(200);
-
-                echo json_encode([
-                    "mensagem" => "Cálculo excluído com sucesso."
-                ]);
-                break;
-
-            default:
-                http_response_code(405);
-
-                echo json_encode([
-                    "erro" => "Método não permitido."
-                ]);
+    public function resolverSistema(array $matriz, array $resultados): array
+    {
+        try {
+            return $this->calculoModel->resolverSistema($matriz, $resultados);
+        } catch (Exception $e) {
+            return ['erro' => $e->getMessage()];
         }
     }
 }
