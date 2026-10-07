@@ -2,15 +2,35 @@
     "name": "joao/projeto_de_mat",
     "description": "projeto de matematica",
     "type": "project",
-    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Joao\\projeto_de_mat\\": "projeto_de_mat/",
+            "Controller\\": "Controller/",
+            "Model\\": "Model/"
+        },
+        "files": [
+            "Config/Configuration.php"
+        ],
+        "classmap": [
+            "Controller/"
+        ]
+    },
     "authors": [
         {
             "name": "joao pedro",
             "email": "joao.p.santos28@ba.estudante.senai.br"
+        },
+        {
+            "name": "Isis Lacerda",
+            "email": "isisba@ba.estudante.senai.br"
         }
     ],
     "minimum-stability": "dev",
+    "require": {
+        "php": ">= 8.0",
+        "ext-mbstring": "*"
+    },
     "require-dev": {
-        "phpunit/phpunit": "^13.5@dev"
+        "phpunit/phpunit": "12"
     }
 }
