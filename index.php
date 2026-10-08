@@ -5,9 +5,12 @@ require_once 'vendor/autoload.php';
 session_start();
 
 use Controller\CalculoController;
+use Model\CalculoModel;
+use Model\Connection;
 
-$calculoController = new CalculoController();
-
+$calculoController = new CalculoController(
+    new CalculoModel(Connection::getInstance())
+);
 
 ?>
 
